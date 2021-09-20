@@ -1,4 +1,4 @@
-﻿@model Vehicles06.API.Data.Entities.VehicleType
+﻿@model Vehicles06.API.Data.Entities.Procedure
 
 @{
     ViewData["Title"] = "Create";
@@ -6,14 +6,14 @@
 
 <h1>Crear</h1>
 
-<h4>Tipo de vehiculo</h4>
+<h4>Procedimiento</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            
-            <partial name="_VehicleType" />
+
+            <partial name="_Procedure" />
 
             <div class="form-group">
                 <input type="submit" value="Crear" class="btn btn-primary" />
@@ -21,6 +21,10 @@
             </div>
         </form>
     </div>
+</div>
+
+<div>
+
 </div>
 
 @section Scripts {
