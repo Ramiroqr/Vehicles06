@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,7 @@ using Vehicles06.API.Data.Entities;
 
 namespace Vehicles06.API.Data
 {
-    public class DataContext : DbContext
+    public class DataContext : IdentityDbContext<User>
     {
         public DataContext(DbContextOptions<DataContext> options) : base (options)
         {
@@ -17,6 +18,10 @@ namespace Vehicles06.API.Data
 
         public DbSet<VehicleType> VehicleTypes { get; set; }
 
+        public DbSet<Brand> Brands { get; set; }
+
+        public DbSet<DocumentType> DocumentTypes { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -25,6 +30,12 @@ namespace Vehicles06.API.Data
                 .HasIndex(x => x.Description).IsUnique();
 
             modelBuilder.Entity<VehicleType>()
+                .HasIndex(x => x.Description).IsUnique();
+
+            modelBuilder.Entity<Brand>()
+                .HasIndex(x => x.Description).IsUnique();
+
+            modelBuilder.Entity<DocumentType>()
                 .HasIndex(x => x.Description).IsUnique();
         }
     }

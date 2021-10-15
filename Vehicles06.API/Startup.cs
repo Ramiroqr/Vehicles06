@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -10,6 +11,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Vehicles06.API.Data;
+using Vehicles06.API.Data.Entities;
+using Vehicles06.API.Helpers;
 
 namespace Vehicles06.API
 {
@@ -25,8 +28,21 @@ namespace Vehicles06.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddIdentity<User, IdentityRole>(x =>
+            {
+                x.User.RequireUniqueEmail = true;
+                x.Password.RequireDigit = false;
+                x.Password.RequiredUniqueChars = 0;
+                x.Password.RequireLowercase = false;
+                x.Password.RequireNonAlphanumeric = false;
+                x.Password.RequireUppercase = false;
+            }).AddEntityFrameworkStores<DataContext>();
+
             services.AddDbContext<DataContext>(x =>
             x.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddTransient<SeedDb>(); //cuando se necesita solo una vez
+            services.AddScoped<IUserHelper, UserHelper>(); // Cada vez que llamemos a la interface
 
             services.AddControllersWithViews();
         }
@@ -46,7 +62,7 @@ namespace Vehicles06.API
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
+            app.UseAuthentication();
             app.UseRouting();
 
             app.UseAuthorization();
