@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -9,6 +10,7 @@ using Vehicles06.API.Data.Entities;
 
 namespace Vehicles06.API.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class DocumentTypes : Controller
     {
         private readonly DataContext _context;

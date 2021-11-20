@@ -26,7 +26,7 @@ namespace Vehicles06.API.Data
             await CheckDocumentTypesAsync();
             await CheckProceduresAsync();
             await CheckRolesAsync();
-            await CheckUserAsync("1010", "Luis", "Salazar", "luis@yopmail.com", "311 322 458", "Calle Luna calle Sol", UserType.Admin);
+            await CheckUserAsync("1010", "Ramiro", "Quispe", "ramiro@yopmail.com", "311 322 4620", "Calle Luna calle Sol", UserType.Admin);
             await CheckUserAsync("2020", "Juan", "Zuluaga", "zulu@yopmail.com", "311 322 458", "Calle Luna calle Sol", UserType.User);
             await CheckUserAsync("3030", "Ledys", "Bedoya", "ledys@yopmail.com", "311 322 458", "Calle Luna calle Sol", UserType.User);
         }

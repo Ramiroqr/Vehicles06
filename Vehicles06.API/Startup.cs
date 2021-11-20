@@ -36,6 +36,8 @@ namespace Vehicles06.API
                 x.Password.RequireLowercase = false;
                 x.Password.RequireNonAlphanumeric = false;
                 x.Password.RequireUppercase = false;
+                x.Password.RequiredLength = 6;
+
             }).AddEntityFrameworkStores<DataContext>();
 
             services.AddDbContext<DataContext>(x =>
@@ -43,8 +45,13 @@ namespace Vehicles06.API
 
             services.AddTransient<SeedDb>(); //cuando se necesita solo una vez
             services.AddScoped<IUserHelper, UserHelper>(); // Cada vez que llamemos a la interface
+            services.AddScoped<ICombosHelper, CombosHelper>();
+            services.AddScoped<IBlobHelper, BlobHelper>();
+            services.AddScoped<IConverterHelper, ConverterHelper>();
 
             services.AddControllersWithViews();
+            
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
