@@ -47,7 +47,7 @@ namespace Vehicles06.API.Helpers
                 Email = user.Email,
                 FirstName = user.FirstName,
                 Id = user.Id,
-                //ImageId = user.imageId,
+                ImageId = user.ImageId,
                 LastName = user.LastName,
                 PhoneNumber = user.PhoneNumber,
                 UserType = user.UserType,
